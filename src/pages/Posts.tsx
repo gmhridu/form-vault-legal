@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import PostCard from "@/components/PostCard";
 
 type Post = {
   id: string;
@@ -19,6 +20,37 @@ type Post = {
   created_at: string;
 };
 
+const postsArray = [
+  {
+
+    id: "1",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    file_url: "https://example.com/test.jpg",
+    file_name: "test.jpg",
+    created_at: "2021-01-01",
+  },
+  {
+    id: "2",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    file_url: "https://example.com/test.jpg",
+    file_name: "test.jpg",
+    created_at: "2021-01-01",
+  },
+  {
+    id: "3",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    file_url: "https://example.com/test.jpg",
+    file_name: "test.jpg",
+    created_at: "2021-01-01",
+  },
+  {
+    id: "4",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    file_url: "https://example.com/test.jpg",
+    file_name: "test.jpg",
+    created_at: "2021-01-01",
+  },
+];
 const Posts = () => {
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
@@ -205,33 +237,12 @@ const Posts = () => {
 
       {/* Posts List */}
       <h2 className="text-2xl font-bold mb-4">Posts</h2>
-      {posts.length === 0 ? (
+      {postsArray.length === 0 ? (
         <div className="text-center text-gray-500">No posts yet</div>
       ) : (
         <div className="space-y-4">
-          {posts.map((post) => (
-            <Card key={post.id} className="overflow-hidden">
-              <CardContent className="p-6">
-                <div className="text-sm text-muted-foreground mb-2">
-                  Posted on {formatDate(post.created_at)}
-                </div>
-                <p className="text-lg mb-4">{post.description}</p>
-                {post.file_url && (
-                  <div className="mt-4">
-                    <Button asChild variant="outline" size="sm">
-                      <a
-                        href={post.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download={post.file_name || true}
-                      >
-                        Download {post.file_name || "Attachment"}
-                      </a>
-                    </Button>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+          {postsArray.map((post) => (
+            <PostCard key={post.id} post={post} />
           ))}
         </div>
       )}
